@@ -18,4 +18,3 @@ router.put('/notes/:id', authenticateToken, validate(notePayloadSchema), editNot
 router.delete('/notes/:id', authenticateToken, deleteNoteById);
 
 export default router;
-

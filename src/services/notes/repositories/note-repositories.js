@@ -37,17 +37,16 @@ class NoteRepositories {
 
   async getNoteById(id) {
     const query = {
-      // text: 'SELECT * FROM notes WHERE id = $1',
-    text: `
-      SELECT id, title, body, tags, "createdAt", "updatedAt"
-      FROM notes
-      WHERE id = $1
-    `,
+      text: `
+        SELECT notes.id, notes.title, notes.body, notes.tags, notes."createdAt", notes."updatedAt", users.username
+        FROM notes
+        JOIN users ON notes.owner = users.id
+        WHERE notes.id = $1
+      `,
       values: [id],
     };
 
     const result = await this.pool.query(query);
-
     return result.rows[0];
   }
 

@@ -21,7 +21,7 @@ export const createUser = async (req, res, next) => {
     return next(new InvariantError('User gagal ditambahkan'));
   }
  
-  return response(res, 201, 'User berhasil ditambahkan', user);
+  return response(res, 201, 'User berhasil ditambahkan', { id: user.id});
 };
 
 export const getUserById = async (req, res, next) => {
