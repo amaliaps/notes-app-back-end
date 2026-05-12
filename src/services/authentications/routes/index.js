@@ -3,9 +3,9 @@ import { login, refreshToken, logout } from '../controller/authentication-contro
 // import { login, refreshToken, logout } from '..../controllers/authentication-controller.js';
 import { validate, validateQuery } from '../../../middlewares/validate.js';
 import {
- postAuthenticationPayloadSchema,
- putAuthenticationPayloadSchema,
- deleteAuthenticationPayloadSchema,
+  postAuthenticationPayloadSchema,
+  putAuthenticationPayloadSchema,
+  deleteAuthenticationPayloadSchema,
 } from '../validator/schema.js';
  
 const router = Router();

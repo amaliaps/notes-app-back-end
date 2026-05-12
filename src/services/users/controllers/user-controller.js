@@ -8,7 +8,7 @@ export const createUser = async (req, res, next) => {
  
   const isUsernameExist = await UserRepositories.verifyNewUsername(username);
   if (isUsernameExist) {
-    return next(new InvariantError('Gagal menambahkan user. Username sudah digunakan.'));
+    return next(new InvariantError('Gagal menambahkan user, Username sudah digunakan.'));
   }
  
   const user = await UserRepositories.createUser({
@@ -21,12 +21,14 @@ export const createUser = async (req, res, next) => {
     return next(new InvariantError('User gagal ditambahkan'));
   }
  
-  return response(res, 201, 'User berhasil ditambahkan', { id: user.id});
+  return response(res, 201, 'User berhasil ditambahkan', { userId: user.id});
 };
 
 export const getUserById = async (req, res, next) => {
   const { id } = req.params;
   const user = await UserRepositories.getUserById(id);
+
+  // console.log('USER FROM REPO:', user); 
  
   if (!user) {
     return next(new NotFoundError('User tidak ditemukan'));
@@ -34,3 +36,14 @@ export const getUserById = async (req, res, next) => {
  
   return response(res, 200, 'User berhasil ditampilkan', {user: user});
 }; 
+
+export const getUsersByUsername = async (req, res, next) => {
+  const username = req.query.username;
+  const user = await UserRepositories.getUsersByUsername(username);
+
+  if (!user) {
+      return next(new NotFoundError('User tidak ditemukan'));
+  }
+
+  return response(res, 200, 'User berhasil ditampilkan', { users: user });
+};

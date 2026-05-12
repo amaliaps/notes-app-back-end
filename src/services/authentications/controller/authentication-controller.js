@@ -11,7 +11,7 @@ export const login = async (req, res, next) => {
   const userId = await UserRepositories.verifyUserCredential(username, password);
  
   if (!userId) {
-    return next(new AuthenticationError('Kredensial yang Anda berikan salah'));
+    return next(new AuthenticationError('Kredensial yang anda berikan salah'));
   }
  
   const accessToken = TokenManager.generateAccessToken({ id: userId });
